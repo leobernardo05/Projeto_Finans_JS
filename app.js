@@ -57,5 +57,7 @@ function cadastrarDespesas () {
     )
     if(despesa.validarDados()) {
         bd.gravar(despesa)
+    } else {
+        $('#erroGravacao').modal('show') //utilizanbdo jquery aqui!
     }
 }
