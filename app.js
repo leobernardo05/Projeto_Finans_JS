@@ -21,13 +21,18 @@ class Bd {
     constructor (){          
         let id = localStorage.getItem('id')
 
-        if (id === null) {
+        if (id === null || isNaN(id)) {
             localStorage.setItem('id', 0)
         }
     }
 
     getProximoId(){
         let proximoId = localStorage.getItem('id') //null
+
+        if(proximoId === null || isNaN(proximoId)){
+            proximoId = 0
+        }
+
         return parseInt(proximoId) + 1
     }
     gravar (d) {
@@ -36,6 +41,21 @@ class Bd {
         localStorage.setItem(id, JSON.stringify(d))  
 
         localStorage.setItem('id', id)
+    }
+    recuperarTodosRegistros (){
+        // array de despesas 
+        let despesas = Array()
+
+        let id = parseInt(localStorage.getItem('id'))
+
+        // recupera todas as despesas em localStorage
+        for(let i = 1; i <= id; i++){
+            // recuperar a despesa
+            let despesa = JSON.parse(localStorage.getItem(i))
+
+            despesas.push(despesa)
+        }
+        console.log(despesas)
     }
 }
 let bd = new Bd()
@@ -74,4 +94,8 @@ function cadastrarDespesas () {
         // dialog de erro
         $('#registraDespesa').modal('show') //utilizando jquery aqui!  
     }
+}
+
+function carregaLista (){
+    bd.recuperarTodosRegistros()
 }
