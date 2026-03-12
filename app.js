@@ -16,8 +16,8 @@ class Despesa {
     }
 }
 
-class Bd {
-    constructor (){
+class Bd {  
+    constructor (){          
         let id = localStorage.getItem('id')
 
         if (id === null) {
