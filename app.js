@@ -13,6 +13,7 @@ class Despesa {
                 return false 
             }
         }
+        return true
     }
 }
 
@@ -57,7 +58,20 @@ function cadastrarDespesas () {
     )
     if(despesa.validarDados()) {
         bd.gravar(despesa)
-    } else {
-        $('#erroGravacao').modal('show') //utilizanbdo jquery aqui!
+        document.getElementById('modal_titulo').innerHTML = 'Registro inserido com sucesso'
+        document.getElementById('modal_descricao').innerHTML = 'O registro foi inserido com sucesso'
+        document.getElementById('cor_titulo').className = 'modal-header text-success'
+        document.getElementById('btn_modal').innerHTML = 'voltar'
+        document.getElementById('btn_modal').className = 'btn btn-success'
+        // dialog de suceso
+        $('#registraDespesa').modal('show') //utilizando jquery aqui!  
+    } else { //------------> erro!!
+        document.getElementById('modal_titulo').innerHTML = 'Registro está invalido'
+        document.getElementById('modal_descricao').innerHTML = 'Verifique se todos os campos foram preenchidos.'
+        document.getElementById('cor_titulo').className = 'modal-header text-danger'
+        document.getElementById('btn_modal').innerHTML = 'voltar e corrigir'
+        document.getElementById('btn_modal').className = 'btn btn-danger'
+        // dialog de erro
+        $('#registraDespesa').modal('show') //utilizando jquery aqui!  
     }
 }
