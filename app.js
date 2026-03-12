@@ -53,6 +53,11 @@ class Bd {
             // recuperar a despesa
             let despesa = JSON.parse(localStorage.getItem(i))
 
+            // existe a possibilidade de haver itens que foram pulados/removidos
+            // nestes casos nós vamos pular esses indices
+            if (despesa === null){
+                continue
+            }
             despesas.push(despesa)
         }
         console.log(despesas)
@@ -97,5 +102,19 @@ function cadastrarDespesas () {
 }
 
 function carregaLista (){
-    bd.recuperarTodosRegistros()
+    let despesas = Array ()
+    despesas = bd.recuperarTodosRegistros()
+
+    //selecionando o elemento tbody da tabela
+    var listaDespesas = document.getElementById('listaDespesas')
+    //percorrer o array despesas, listando cada despesa
+    despesas.forEach(function(d) {
+        // criando a linha (tr)
+        let linha = listaDespesas.insertRow()
+        // criar as colunas
+        linha.insertCell(0).innerHTML = d.dia + '/' + d.mes + '/' + d.ano
+        linha.insertCell(1).innerHTML
+        linha.insertCell(2).innerHTML
+        linha.insertCell(3).innerHTML
+    })
 }
