@@ -90,6 +90,14 @@ function cadastrarDespesas () {
         document.getElementById('btn_modal').className = 'btn btn-success'
         // dialog de suceso
         $('#registraDespesa').modal('show') //utilizando jquery aqui!  
+        // limpar campos de inputs apos preencher dados
+        ano.value = '',
+        mes.value = '',
+        dia.value = '',
+        tipo.value = '', 
+        descricao.value = '',
+        valor.value = ''
+
     } else { //------------> erro!!
         document.getElementById('modal_titulo').innerHTML = 'Registro está invalido'
         document.getElementById('modal_descricao').innerHTML = 'Verifique se todos os campos foram preenchidos.'
