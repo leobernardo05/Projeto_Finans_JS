@@ -63,7 +63,33 @@ class Bd {
         return despesas
     }
     pesquisar(despesa){
-
+        let despesasFiltradas = Array()
+        despesasFiltradas = this.recuperarTodosRegistros() //encapsulado apenas em uma 
+        // ano
+        if(despesa.ano != '') {
+            despesasFiltradas = despesasFiltradas.filter (d => d.ano == despesa.ano)
+        }
+        // mes
+        if(despesa.mes != '') {
+            despesasFiltradas.filter (d => d.mes == despesa.mes)
+        }
+        // dia
+        if(despesa.dia != '') {
+            despesasFiltradas.filter (d => d.dia == despesa.dia)
+        }
+        // tipo
+        if(despesa.tipo != '') {
+            despesasFiltradas.filter (d => d.tipo == despesa.tipo)
+        }
+        // descricao
+        if(despesa.descricao != '') {
+            despesasFiltradas.filter (d => d.descricao == despesa.descricao)
+        }
+        // valor
+        if(despesa.valor != '') {
+            despesasFiltradas.filter (d => d.valor == despesa.valor)
+        }
+        return despesasFiltradas
     }
 }
 let bd = new Bd()
@@ -161,5 +187,5 @@ function pesquisarDespesa (){
 
     // recebe por paramatro as variaveis
     bd.pesquisar(despesa)
-
+    
 }
