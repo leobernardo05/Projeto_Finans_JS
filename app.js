@@ -58,6 +58,7 @@ class Bd {
             if (despesa === null){
                 continue
             }
+            despesa.id = i
             despesas.push(despesa)
         }
         return despesas
@@ -89,6 +90,9 @@ class Bd {
             despesasFiltradas = despesasFiltradas.filter (d => d.valor == despesa.valor)
         }
         return despesasFiltradas
+    }
+    remover(id){
+        localStorage.removeItem(id)
     }
 }
 let bd = new Bd()
@@ -137,10 +141,12 @@ function cadastrarDespesas () {
     }
 }
 
-function carregaLista (despesas = Array()){
-    if (despesas.length == 0){
+function carregaLista (despesas = Array(), filtro = false){
+    
+    if (despesas.length == 0 && filtro == false){
         despesas = bd.recuperarTodosRegistros()
     }
+
     //selecionando o elemento tbody da tabela
     var listaDespesas = document.getElementById('listaDespesas')
     listaDespesas.innerHTML = ''
@@ -172,6 +178,18 @@ function carregaLista (despesas = Array()){
         linha.insertCell(1).innerHTML = d.tipo 
         linha.insertCell(2).innerHTML = d.descricao
         linha.insertCell(3).innerHTML = d.valor
+        // botão de exlcusão
+        let btn = document.createElement('button')
+        btn.className = 'btn btn-danger'
+        btn.innerHTML = '<i class="fas fa-times"></i>'
+        btn.id = 'id_despesa_' + d.id
+        btn.onclick = function () {
+            // remover a despesa
+            let id = this.id.replace('id_despesa_', '') //replace é utilizado para substituir strings
+            bd.remover(id)
+            window.location.reload()
+        }
+        linha.insertCell(4).append(btn) //insere um conjunto de objetos Node ou strings após o último filho de um elemento.
     })
 }
 
@@ -186,5 +204,5 @@ function pesquisarDespesa (){
     let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor)
 
     let despesas = bd.pesquisar(despesa)  // recebe por paramatro as variaveis
-    carregaLista(despesas)
+    carregaLista(despesas, true)
 }
