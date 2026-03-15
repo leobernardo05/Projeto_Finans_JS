@@ -63,31 +63,30 @@ class Bd {
         return despesas
     }
     pesquisar(despesa){
-        let despesasFiltradas = Array()
-        despesasFiltradas = this.recuperarTodosRegistros() //encapsulado apenas em uma 
+        let despesasFiltradas = this.recuperarTodosRegistros() //encapsulado apenas em uma 
         // ano
         if(despesa.ano != '') {
             despesasFiltradas = despesasFiltradas.filter (d => d.ano == despesa.ano)
         }
         // mes
         if(despesa.mes != '') {
-            despesasFiltradas.filter (d => d.mes == despesa.mes)
+            despesasFiltradas = despesasFiltradas.filter (d => d.mes == despesa.mes)
         }
         // dia
         if(despesa.dia != '') {
-            despesasFiltradas.filter (d => d.dia == despesa.dia)
+            despesasFiltradas = despesasFiltradas.filter (d => d.dia == despesa.dia)
         }
         // tipo
         if(despesa.tipo != '') {
-            despesasFiltradas.filter (d => d.tipo == despesa.tipo)
+            despesasFiltradas = despesasFiltradas.filter (d => d.tipo == despesa.tipo)
         }
         // descricao
         if(despesa.descricao != '') {
-            despesasFiltradas.filter (d => d.descricao == despesa.descricao)
+            despesasFiltradas = despesasFiltradas.filter (d => d.descricao == despesa.descricao)
         }
         // valor
         if(despesa.valor != '') {
-            despesasFiltradas.filter (d => d.valor == despesa.valor)
+            despesasFiltradas = despesasFiltradas.filter (d => d.valor == despesa.valor)
         }
         return despesasFiltradas
     }
@@ -138,12 +137,13 @@ function cadastrarDespesas () {
     }
 }
 
-function carregaLista (){
-    let despesas = Array ()
-    despesas = bd.recuperarTodosRegistros()
-
+function carregaLista (despesas = Array()){
+    if (despesas.length == 0){
+        despesas = bd.recuperarTodosRegistros()
+    }
     //selecionando o elemento tbody da tabela
     var listaDespesas = document.getElementById('listaDespesas')
+    listaDespesas.innerHTML = ''
     //percorrer o array despesas, listando cada despesa
     despesas.forEach(function(d) {
         // criando a linha (tr)
@@ -185,7 +185,6 @@ function pesquisarDespesa (){
 
     let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor)
 
-    // recebe por paramatro as variaveis
-    bd.pesquisar(despesa)
-    
+    let despesas = bd.pesquisar(despesa)  // recebe por paramatro as variaveis
+    carregaLista(despesas)
 }
