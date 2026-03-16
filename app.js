@@ -187,7 +187,7 @@ function carregaLista (despesas = Array(), filtro = false){
             // remover a despesa
             let id = this.id.replace('id_despesa_', '') //replace é utilizado para substituir strings
             bd.remover(id)
-            window.location.reload()
+            window.location.reload() //atualizar após apagar 
         }
         linha.insertCell(4).append(btn) //insere um conjunto de objetos Node ou strings após o último filho de um elemento.
     })
