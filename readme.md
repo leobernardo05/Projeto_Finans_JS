@@ -99,7 +99,6 @@ Consulta de despesas:
 
 ## 📌 Possíveis melhorias futuras
 
-* Adicionar **exclusão de despesas**
 * Adicionar **edição de despesas**
 * Implementar **gráficos de gastos**
 * Criar versão utilizando **React**
